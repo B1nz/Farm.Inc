@@ -49,12 +49,10 @@ class Register : AppCompatActivity() {
             .getAsJSONArray(object : JSONArrayRequestListener {
                 override fun onResponse(response: JSONArray?) {
                     Log.i("Uji Coba", "Sukses")
-                    Toast.makeText(applicationContext,"Berhasil Register!", Toast.LENGTH_LONG).show()
                 }
 
                 override fun onError(anError: ANError?) {
                     Log.i("Uji Coba", "Mandul")
-                    Toast.makeText(applicationContext,"Gagal Register!", Toast.LENGTH_LONG).show()
                 }
             })
     }
