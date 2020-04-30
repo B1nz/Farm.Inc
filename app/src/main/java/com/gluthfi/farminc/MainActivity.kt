@@ -22,19 +22,5 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, ProfileActivity::class.java))
             finish()
         }
-
-        logout.setOnClickListener{
-            val sharedPreferences=getSharedPreferences("CEKLOGIN", Context.MODE_PRIVATE)
-            val editor=sharedPreferences.edit()
-
-            editor.putString("STATUS","0")
-            editor.putString("EMAIL", "NULL")
-            editor.apply()
-
-            Toast.makeText(applicationContext,"User logout", Toast.LENGTH_LONG).show()
-
-            startActivity(Intent(this,Login::class.java))
-            finish()
-        }
     }
 }
