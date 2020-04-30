@@ -30,6 +30,11 @@ class Register : AppCompatActivity() {
             startActivity(Intent(this, Login::class.java))
             finish()
         }
+
+        btnBackReg.setOnClickListener {
+            startActivity(Intent(this, Login::class.java))
+            finish()
+        }
     }
 
     fun postkeserver(data1:String, data2:String, data3:String, data4:String, data5:String) {
@@ -44,11 +49,12 @@ class Register : AppCompatActivity() {
             .getAsJSONArray(object : JSONArrayRequestListener {
                 override fun onResponse(response: JSONArray?) {
                     Log.i("Uji Coba", "Sukses")
-                    Toast.makeText(applicationContext,"Berhasil insert!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext,"Berhasil Register!", Toast.LENGTH_LONG).show()
                 }
 
                 override fun onError(anError: ANError?) {
                     Log.i("Uji Coba", "Mandul")
+                    Toast.makeText(applicationContext,"Gagal Register!", Toast.LENGTH_LONG).show()
                 }
             })
     }
