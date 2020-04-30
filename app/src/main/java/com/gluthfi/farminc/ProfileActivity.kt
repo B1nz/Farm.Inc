@@ -25,6 +25,11 @@ class ProfileActivity : AppCompatActivity() {
             finish()
         }
 
+        profileUpdate.setOnClickListener {
+            startActivity(Intent(this, ProfileUpdate::class.java))
+            finish()
+        }
+
         val sharedPreferences = getSharedPreferences("CEKLOGIN", Context.MODE_PRIVATE)
         val email=sharedPreferences.getString("EMAIL","")
 

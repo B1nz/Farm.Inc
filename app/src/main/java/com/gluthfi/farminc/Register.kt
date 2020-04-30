@@ -11,6 +11,7 @@ import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONArrayRequestListener
 import kotlinx.android.synthetic.main.activity_register.*
 import org.json.JSONArray
+import java.time.LocalDateTime
 
 class Register : AppCompatActivity() {
 
@@ -24,8 +25,9 @@ class Register : AppCompatActivity() {
             var data3 = passwordReg.text.toString()
             var data4 = alamatReg.text.toString()
             var data5 = hpReg.text.toString()
+            val data6 = LocalDateTime.now().toString()
 
-            postkeserver(data1, data2, data3, data4, data5)
+            postkeserver(data1, data2, data3, data4, data5, data6)
 
             startActivity(Intent(this, Login::class.java))
             finish()
@@ -37,13 +39,14 @@ class Register : AppCompatActivity() {
         }
     }
 
-    fun postkeserver(data1:String, data2:String, data3:String, data4:String, data5:String) {
+    fun postkeserver(data1:String, data2:String, data3:String, data4:String, data5:String, data6: String) {
         AndroidNetworking.post("http://192.168.100.8/farminc/register.php")
             .addBodyParameter("nama", data1)
             .addBodyParameter("email", data2)
             .addBodyParameter("password", data3)
             .addBodyParameter("alamat", data4)
             .addBodyParameter("nohp", data5)
+            .addBodyParameter("created_at", data6)
             .setPriority(Priority.MEDIUM)
             .build()
             .getAsJSONArray(object : JSONArrayRequestListener {
