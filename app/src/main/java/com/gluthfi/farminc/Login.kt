@@ -22,7 +22,6 @@ class Login : AppCompatActivity() {
 
         val sharedPreferences = getSharedPreferences("CEKLOGIN", Context.MODE_PRIVATE)
         val stat=sharedPreferences.getString("STATUS","")
-        val email = sharedPreferences.getString("S", "")
 
         if (stat=="1"){
 
@@ -33,7 +32,7 @@ class Login : AppCompatActivity() {
 
         else {
 
-            btnLogin.setOnClickListener{
+            btnLogin.setOnClickListener{)
 
                 var email = emailEt.text.toString()
                 var password = passwordEt.text.toString()
@@ -75,9 +74,10 @@ class Login : AppCompatActivity() {
                             val editor=sharedPreferences.edit()
 
                             editor.putString("STATUS",statuslogin)
+                            editor.putString("EMAIL", emailEt.text.toString())
                             editor.apply()
 
-                            Toast.makeText(applicationContext,"Login Berhasil!", Toast.LENGTH_LONG).show()
+                            Toast.makeText(applicationContext,"Welcome!", Toast.LENGTH_LONG).show()
 
                             startActivity(Intent(this@Login, MainActivity::class.java))
                             finish()

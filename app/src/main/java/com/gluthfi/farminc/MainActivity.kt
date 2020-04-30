@@ -13,11 +13,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val sharedPreferences = getSharedPreferences("CEKLOGIN", Context.MODE_PRIVATE)
+        val email=sharedPreferences.getString("EMAIL","")
+
+        userwelcome.setText(email)
+
         logout.setOnClickListener{
             val sharedPreferences=getSharedPreferences("CEKLOGIN", Context.MODE_PRIVATE)
             val editor=sharedPreferences.edit()
 
             editor.putString("STATUS","0")
+            editor.putString("EMAIL", "NULL")
             editor.apply()
 
             Toast.makeText(applicationContext,"User logout", Toast.LENGTH_LONG).show()
