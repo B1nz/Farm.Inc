@@ -30,6 +30,11 @@ class Register : AppCompatActivity() {
             startActivity(Intent(this, Login::class.java))
             finish()
         }
+
+        btnBackReg.setOnClickListener {
+            startActivity(Intent(this, Login::class.java))
+            finish()
+        }
     }
 
     fun postkeserver(data1:String, data2:String, data3:String, data4:String, data5:String) {
