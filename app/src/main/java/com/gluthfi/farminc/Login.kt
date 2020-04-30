@@ -32,7 +32,7 @@ class Login : AppCompatActivity() {
 
         else {
 
-            btnLogin.setOnClickListener{)
+            btnLogin.setOnClickListener{
 
                 var email = emailEt.text.toString()
                 var password = passwordEt.text.toString()

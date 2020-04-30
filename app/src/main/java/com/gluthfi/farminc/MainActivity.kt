@@ -18,6 +18,11 @@ class MainActivity : AppCompatActivity() {
 
         userwelcome.setText(email)
 
+        profile.setOnClickListener {
+            startActivity(Intent(this, ProfileActivity::class.java))
+            finish()
+        }
+
         logout.setOnClickListener{
             val sharedPreferences=getSharedPreferences("CEKLOGIN", Context.MODE_PRIVATE)
             val editor=sharedPreferences.edit()
