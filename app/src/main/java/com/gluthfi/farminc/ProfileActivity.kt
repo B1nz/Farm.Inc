@@ -11,6 +11,7 @@ import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONObjectRequestListener
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_profile.*
 import org.json.JSONObject
 
@@ -27,6 +28,20 @@ class ProfileActivity : AppCompatActivity() {
 
         profileUpdate.setOnClickListener {
             startActivity(Intent(this, ProfileUpdate::class.java))
+            finish()
+        }
+
+        logoutBtn.setOnClickListener{
+            val sharedPreferences=getSharedPreferences("CEKLOGIN", Context.MODE_PRIVATE)
+            val editor=sharedPreferences.edit()
+
+            editor.putString("STATUS","0")
+            editor.putString("EMAIL", "NULL")
+            editor.apply()
+
+            Toast.makeText(applicationContext,"User logout", Toast.LENGTH_LONG).show()
+
+            startActivity(Intent(this,Login::class.java))
             finish()
         }
 
