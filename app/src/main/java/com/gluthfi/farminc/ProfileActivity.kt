@@ -37,6 +37,7 @@ class ProfileActivity : AppCompatActivity() {
 
             editor.putString("STATUS","0")
             editor.putString("EMAIL", "NULL")
+            editor.putString("ID", "NULL")
             editor.apply()
 
             Toast.makeText(applicationContext,"User logout", Toast.LENGTH_LONG).show()
