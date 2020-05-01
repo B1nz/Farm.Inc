@@ -74,7 +74,8 @@ class Login : AppCompatActivity() {
                             val editor=sharedPreferences.edit()
 
                             editor.putString("STATUS",statuslogin)
-                            editor.putString("EMAIL", emailEt.text.toString())
+                            editor.putString("ID", jsonObject.optString("id_user").toString())
+                            editor.putString("EMAIL", jsonObject.optString("email").toString())
                             editor.apply()
 
                             Toast.makeText(applicationContext,"Welcome!", Toast.LENGTH_LONG).show()

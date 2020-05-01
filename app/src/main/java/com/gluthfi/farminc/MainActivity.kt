@@ -15,11 +15,18 @@ class MainActivity : AppCompatActivity() {
 
         val sharedPreferences = getSharedPreferences("CEKLOGIN", Context.MODE_PRIVATE)
         val email=sharedPreferences.getString("EMAIL","")
+        val id=sharedPreferences.getString("ID","")
 
         userwelcome.setText(email)
+        idwell.setText(id)
 
         profile.setOnClickListener {
             startActivity(Intent(this, ProfileActivity::class.java))
+            finish()
+        }
+
+        tambah.setOnClickListener {
+            startActivity(Intent(this, AddProduct::class.java))
             finish()
         }
     }

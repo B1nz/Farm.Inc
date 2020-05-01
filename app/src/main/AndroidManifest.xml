@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ProfileUpdate"></activity>
+        <activity android:name=".AddProduct"></activity>
+        <activity android:name=".ProfileUpdate" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".IntroActivity" />
         <activity android:name=".SplashActivity">
