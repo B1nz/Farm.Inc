@@ -24,15 +24,15 @@ class ProfileUpdate : AppCompatActivity() {
         setContentView(R.layout.activity_profile_update)
 
         updateBack.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, ProfileActivity::class.java))
             finish()
         }
 
         val sharedPreferences = getSharedPreferences("CEKLOGIN", Context.MODE_PRIVATE)
-        val email=sharedPreferences.getString("EMAIL","")
+        val id_pengguna=sharedPreferences.getString("ID","")
 
-        AndroidNetworking.post("http://192.168.100.8/farminc/showuser.php")
-            .addBodyParameter("email", email)
+        AndroidNetworking.post(ApiEndPoint.PROFILE_UPDATE)
+            .addBodyParameter("id_pengguna", id_pengguna)
             .setPriority(Priority.MEDIUM)
             .build()
             .getAsJSONObject(object : JSONObjectRequestListener {
@@ -58,20 +58,21 @@ class ProfileUpdate : AppCompatActivity() {
 
         updateBtn.setOnClickListener {
             var data1 = namaUpdate.text.toString()
-            var data2 = email.toString()
+            var data2 = emailUpdate.text.toString()
             var data3 = passwordUpdate.text.toString()
             var data4 = alamatUpdate.text.toString()
             var data5 = nohpUpdate.text.toString()
             val data6 = LocalDateTime.now().toString()
+            val data7 = id_pengguna.toString()
 
-            postkeserver(data1, data2, data3, data4, data5, data6)
+            postkeserver(data1, data2, data3, data4, data5, data6, data7)
 
             startActivity(Intent(this, ProfileActivity::class.java))
             finish()
         }
     }
 
-    fun postkeserver(data1:String, data2:String, data3:String, data4:String, data5:String, data6: String) {
+    fun postkeserver(data1:String, data2:String, data3:String, data4:String, data5:String, data6: String, data7:String) {
         AndroidNetworking.post("http://192.168.100.8/farminc/profileupdate.php")
             .addBodyParameter("nama", data1)
             .addBodyParameter("email", data2)
@@ -79,6 +80,7 @@ class ProfileUpdate : AppCompatActivity() {
             .addBodyParameter("alamat", data4)
             .addBodyParameter("nohp", data5)
             .addBodyParameter("updated_at", data6)
+            .addBodyParameter("id_pengguna", data7)
             .setPriority(Priority.MEDIUM)
             .build()
             .getAsJSONArray(object : JSONArrayRequestListener {

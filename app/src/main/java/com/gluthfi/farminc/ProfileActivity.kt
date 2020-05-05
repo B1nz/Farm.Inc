@@ -4,14 +4,11 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONObjectRequestListener
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_profile.*
 import org.json.JSONObject
 
@@ -36,21 +33,21 @@ class ProfileActivity : AppCompatActivity() {
             val editor=sharedPreferences.edit()
 
             editor.putString("STATUS","0")
-            editor.putString("EMAIL", "NULL")
+            editor.putString("NAMA", "NULL")
             editor.putString("ID", "NULL")
             editor.apply()
 
             Toast.makeText(applicationContext,"User logout", Toast.LENGTH_LONG).show()
 
-            startActivity(Intent(this,Login::class.java))
+            startActivity(Intent(this,LoginActivity::class.java))
             finish()
         }
 
         val sharedPreferences = getSharedPreferences("CEKLOGIN", Context.MODE_PRIVATE)
-        val email=sharedPreferences.getString("EMAIL","")
+        val id_pengguna=sharedPreferences.getString("ID","")
 
-        AndroidNetworking.post("http://192.168.100.8/farminc/showuser.php")
-            .addBodyParameter("email", email)
+        AndroidNetworking.post(ApiEndPoint.PROFILE)
+            .addBodyParameter("id_pengguna", id_pengguna)
             .setPriority(Priority.MEDIUM)
             .build()
             .getAsJSONObject(object : JSONObjectRequestListener {

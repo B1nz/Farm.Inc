@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
@@ -14,7 +13,7 @@ import com.androidnetworking.interfaces.JSONObjectRequestListener
 import kotlinx.android.synthetic.main.activity_login.*
 import org.json.JSONObject
 
-class Login : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +42,7 @@ class Login : AppCompatActivity() {
             }
 
             btnRegister.setOnClickListener {
-                startActivity(Intent(this, Register::class.java))
+                startActivity(Intent(this, RegisterActivity::class.java))
                 finish()
             }
         }
@@ -52,7 +51,7 @@ class Login : AppCompatActivity() {
     fun postkerserver(data1:String,data2:String)
     {
 
-        AndroidNetworking.post("http://192.168.100.8/farminc/ceklogin.php")
+        AndroidNetworking.post(ApiEndPoint.LOGIN)
             .addBodyParameter("email", data1)
             .addBodyParameter("password", data2)
             .setPriority(Priority.MEDIUM)
@@ -74,13 +73,13 @@ class Login : AppCompatActivity() {
                             val editor=sharedPreferences.edit()
 
                             editor.putString("STATUS",statuslogin)
-                            editor.putString("ID", jsonObject.optString("id_user").toString())
-                            editor.putString("EMAIL", jsonObject.optString("email").toString())
+                            editor.putString("ID", jsonObject.optString("id_pengguna").toString())
+                            editor.putString("NAMA", jsonObject.optString("nama").toString())
                             editor.apply()
 
                             Toast.makeText(applicationContext,"Welcome!", Toast.LENGTH_LONG).show()
 
-                            startActivity(Intent(this@Login, MainActivity::class.java))
+                            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                             finish()
                         } else {
                             Log.i("Uji Coba", "Mandul")

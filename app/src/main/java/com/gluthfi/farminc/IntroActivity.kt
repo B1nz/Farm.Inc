@@ -19,12 +19,12 @@ class IntroActivity : AppCompatActivity() {
         preference = getSharedPreferences("IntroSlider", Context.MODE_PRIVATE)
 
         if (!preference.getBoolean(pref_show_intro, true)) {
-            startActivity(Intent(this, Login::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
 
         introBtn.setOnClickListener {
-            startActivity(Intent(this, Login::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
 
             val editor = preference.edit()

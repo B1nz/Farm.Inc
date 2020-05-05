@@ -2,11 +2,11 @@ package com.gluthfi.farminc
 
 import CustomAdapter
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,43 +15,36 @@ import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONObjectRequestListener
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_search.*
+import kotlinx.android.synthetic.main.activity_search.searchEt
 import org.json.JSONObject
 import java.util.ArrayList
 
-class MainActivity : AppCompatActivity() {
+class SearchActivity : AppCompatActivity() {
 
     @SuppressLint("WrongConstant")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_search)
 
-        val sharedPreferences = getSharedPreferences("CEKLOGIN", Context.MODE_PRIVATE)
-        val nama=sharedPreferences.getString("NAMA","")
-        val id=sharedPreferences.getString("ID","")
+        val sRecyclerView = findViewById(R.id.sRecyclerView) as RecyclerView
+        sRecyclerView.layoutManager= LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        sRecyclerView.setHasFixedSize(true)
 
-        userwelcome.setText(nama)
-        idwell.setText(id)
+        backSrch.setOnClickListener {
 
-        profile.setOnClickListener {
-            startActivity(Intent(this, ProfileActivity::class.java))
-        }
-
-        tambah.setOnClickListener {
-            startActivity(Intent(this, AddProduct::class.java))
-        }
-
-        searchBtn.setOnClickListener {
             val sharedPreferences=getSharedPreferences("SEARCH", Context.MODE_PRIVATE)
             val editor=sharedPreferences.edit()
 
             editor.putString("CARI","")
             editor.apply()
 
-            startActivity(Intent(this, SearchActivity::class.java))
+
+            startActivity(Intent(this,MainActivity::class.java))
+            finish()
         }
 
-        searchMain.setOnClickListener {
+        searchSrch.setOnClickListener {
 
             val sharedPreferences=getSharedPreferences("SEARCH", Context.MODE_PRIVATE)
             val editor=sharedPreferences.edit()
@@ -59,23 +52,24 @@ class MainActivity : AppCompatActivity() {
             editor.putString("CARI",searchEt.text.toString())
             editor.apply()
 
-            startActivity(Intent(this, SearchActivity::class.java))
+            startActivity(Intent(getIntent()))
+            finish()
         }
 
-        val recyclerView = findViewById(R.id.mRecyclerView) as RecyclerView
-        recyclerView.layoutManager= LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        recyclerView.setHasFixedSize(true)
+        val sharedPreferences = getSharedPreferences("SEARCH", Context.MODE_PRIVATE)
+        val cari=sharedPreferences.getString("CARI","")
 
-        val freshPrdk = ArrayList<Produk>()
+        val searchPrdk = ArrayList<Produk>()
 
-        AndroidNetworking.get(ApiEndPoint.FRESH)
+        AndroidNetworking.post(ApiEndPoint.SEARCH)
+            .addBodyParameter("search", cari)
             .setPriority(Priority.MEDIUM)
             .build()
             .getAsJSONObject(object : JSONObjectRequestListener {
                 override fun onResponse(response: JSONObject) {
-                    Log.e("_kotlinResponse", response.toString())
 
                     val jsonArray = response.getJSONArray("result")
+
                     for (i in 0 until jsonArray.length()) {
                         val jsonObject = jsonArray.getJSONObject(i)
 
@@ -84,12 +78,12 @@ class MainActivity : AppCompatActivity() {
                         var namaPrdk = jsonObject.optString("nama_produk").toString()
                         var hargaPrdk = jsonObject.optString("harga").toString()
 
-                        freshPrdk.add(Produk("$idPrdk", "$imagePrdk", "$namaPrdk", "$hargaPrdk"))
+                        searchPrdk.add(Produk("$idPrdk", "$imagePrdk", "$namaPrdk", "$hargaPrdk"))
 
                     }
 
-                    val adapter = CustomAdapter(applicationContext, freshPrdk)
-                    recyclerView.adapter=adapter
+                    val adapter = CustomAdapter(applicationContext, searchPrdk)
+                    sRecyclerView.adapter=adapter
 
                 }
 
@@ -99,28 +93,18 @@ class MainActivity : AppCompatActivity() {
                 }
 
             })
+
     }
 
 //    override fun onResume() {
 //        super.onResume()
-//        loadFresh()
+//        loadSearch()
 //    }
 //
-//    private fun loadFresh() {
-//
-//
+//    private fun loadSearch() {
 //    }
 
-    private var doubleBackToExitPressedOnce = false
-    override fun onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
-            super.onBackPressed()
-            return
-        }
-
-        this.doubleBackToExitPressedOnce = true
-        Toast.makeText(this, "Please click Back again to exit", Toast.LENGTH_SHORT).show()
-
-        Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
-    }
+//    override fun onItemClick(produk: Produk, position: Int) {
+//        Toast.makeText(this, produk.nama, Toast.LENGTH_SHORT).show()
+//    }
 }

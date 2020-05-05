@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
@@ -13,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_register.*
 import org.json.JSONArray
 import java.time.LocalDateTime
 
-class Register : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,18 +28,18 @@ class Register : AppCompatActivity() {
 
             postkeserver(data1, data2, data3, data4, data5, data6)
 
-            startActivity(Intent(this, Login::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
 
         btnBackReg.setOnClickListener {
-            startActivity(Intent(this, Login::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
     }
 
     fun postkeserver(data1:String, data2:String, data3:String, data4:String, data5:String, data6: String) {
-        AndroidNetworking.post("http://192.168.100.8/farminc/register.php")
+        AndroidNetworking.post(ApiEndPoint.REGISTER)
             .addBodyParameter("nama", data1)
             .addBodyParameter("email", data2)
             .addBodyParameter("password", data3)
