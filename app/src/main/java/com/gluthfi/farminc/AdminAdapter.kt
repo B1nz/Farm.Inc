@@ -3,29 +3,25 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.gluthfi.farminc.Produk
 import com.gluthfi.farminc.ProdukActivity
 import com.gluthfi.farminc.R
 import kotlinx.android.synthetic.main.produk_list.view.*
 
-class CustomAdapter(private val context: Context, private val produkList: ArrayList<Produk>):RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
+class AdminAdapter(private val context: Context, private val produkList: ArrayList<Produk>):RecyclerView.Adapter<AdminAdapter.ViewHolder>() {
 
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-//        val prdk: Produk=produkList[position]
-//        holder?.idPrdk?.text = prdk.id
-//        holder?.imagePrdk?.text = prdk.image
-//        holder?.namaPrdk?.text = prdk.nama
-//        holder?.hargaPrdk?.text = prdk.harga
-
         holder.itemView.idPrdk.text = produkList?.get(position)?.id
         holder.itemView.imagePrdk.text = produkList?.get(position)?.image
         holder.itemView.namaPrdk.text = produkList?.get(position)?.nama
         holder.itemView.hargaPrdk.text = produkList?.get(position)?.harga
+        holder.itemView.penggunaPrdk.text = produkList?.get(position)?.pengguna_id
+        holder.itemView.deskripsiPrdk.text = produkList?.get(position)?.deskripsi
+        holder.itemView.kategoriPrdk.text = produkList?.get(position)?.kategori
 
         holder.itemView.cvList.setOnClickListener() {
 
@@ -36,6 +32,9 @@ class CustomAdapter(private val context: Context, private val produkList: ArrayL
             i.putExtra("image", produkList?.get(position)?.image)
             i.putExtra("nama", produkList?.get(position)?.nama)
             i.putExtra("harga", produkList?.get(position)?.harga)
+            i.putExtra("pengguna", produkList?.get(position)?.pengguna_id)
+            i.putExtra("deskripsi", produkList?.get(position)?.deskripsi)
+            i.putExtra("kategori", produkList?.get(position)?.kategori)
             context.startActivity(i)
         }
     }
@@ -57,10 +56,7 @@ class CustomAdapter(private val context: Context, private val produkList: ArrayL
 
     class  ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
 
-        val idPrdk = itemView.findViewById(R.id.idPrdk) as TextView
-        val imagePrdk = itemView.findViewById(R.id.imagePrdk) as TextView
-        val namaPrdk = itemView.findViewById(R.id.namaPrdk) as TextView
-        val hargaPrdk = itemView.findViewById(R.id.hargaPrdk) as TextView
+        
     }
 
 }

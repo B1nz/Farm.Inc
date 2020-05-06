@@ -1,6 +1,6 @@
 package com.gluthfi.farminc
 
-import CustomAdapter
+import UserAdapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -26,19 +26,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val sharedPreferences = getSharedPreferences("CEKLOGIN", Context.MODE_PRIVATE)
-        val nama=sharedPreferences.getString("NAMA","")
-        val id=sharedPreferences.getString("ID","")
-
-        userwelcome.setText(nama)
-        idwell.setText(id)
-
         profile.setOnClickListener {
             startActivity(Intent(this, ProfileActivity::class.java))
         }
 
         tambah.setOnClickListener {
-            startActivity(Intent(this, AddProduct::class.java))
+            startActivity(Intent(this, ProdukActivity::class.java))
         }
 
         searchBtn.setOnClickListener {
@@ -46,6 +39,7 @@ class MainActivity : AppCompatActivity() {
             val editor=sharedPreferences.edit()
 
             editor.putString("CARI","")
+            editor.putString("KATEGORI","")
             editor.apply()
 
             startActivity(Intent(this, SearchActivity::class.java))
@@ -57,10 +51,25 @@ class MainActivity : AppCompatActivity() {
             val editor=sharedPreferences.edit()
 
             editor.putString("CARI",searchEt.text.toString())
+            editor.putString("KATEGORI","")
             editor.apply()
 
             startActivity(Intent(this, SearchActivity::class.java))
+
+            searchEt.setText("")
         }
+
+        swipeRefresh.setOnRefreshListener {
+            getFresh()
+        }
+
+        getFresh()
+
+    }
+
+    private fun getFresh() {
+
+        swipeRefresh.isRefreshing = true
 
         val recyclerView = findViewById(R.id.mRecyclerView) as RecyclerView
         recyclerView.layoutManager= LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -73,6 +82,9 @@ class MainActivity : AppCompatActivity() {
             .build()
             .getAsJSONObject(object : JSONObjectRequestListener {
                 override fun onResponse(response: JSONObject) {
+
+                    swipeRefresh.isRefreshing = false
+
                     Log.e("_kotlinResponse", response.toString())
 
                     val jsonArray = response.getJSONArray("result")
@@ -83,33 +95,29 @@ class MainActivity : AppCompatActivity() {
                         var imagePrdk = jsonObject.optString("image").toString()
                         var namaPrdk = jsonObject.optString("nama_produk").toString()
                         var hargaPrdk = jsonObject.optString("harga").toString()
+                        var penggunaPrdk = jsonObject.optString("pengguna_id").toString()
+                        var deskripsiPrdk = jsonObject.optString("deskripsi").toString()
+                        var kategoriPrdk = jsonObject.optString("kategori").toString()
 
-                        freshPrdk.add(Produk("$idPrdk", "$imagePrdk", "$namaPrdk", "$hargaPrdk"))
+                        freshPrdk.add(Produk("$idPrdk", "$imagePrdk", "$namaPrdk", "$hargaPrdk", "$penggunaPrdk", "$deskripsiPrdk", "$kategoriPrdk"))
 
                     }
 
-                    val adapter = CustomAdapter(applicationContext, freshPrdk)
+                    val adapter = UserAdapter(applicationContext, freshPrdk)
                     recyclerView.adapter=adapter
 
                 }
 
                 override fun onError(anError: ANError?) {
+
+                    swipeRefresh.isRefreshing = false
+
                     Log.d("ONERROR",anError?.errorDetail?.toString())
                     Toast.makeText(applicationContext,"Connection Failure",Toast.LENGTH_SHORT).show()
                 }
 
             })
     }
-
-//    override fun onResume() {
-//        super.onResume()
-//        loadFresh()
-//    }
-//
-//    private fun loadFresh() {
-//
-//
-//    }
 
     private var doubleBackToExitPressedOnce = false
     override fun onBackPressed() {

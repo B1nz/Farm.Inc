@@ -35,18 +35,6 @@
             android:src="@drawable/search_black" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/userwelcome"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
-
-    <TextView
-        android:id="@+id/idwell"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
-
     <Button
         android:id="@+id/profile"
         android:layout_width="wrap_content"
@@ -72,10 +60,17 @@
         android:textColor="#000"
         android:textSize="25dp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/mRecyclerView"
-        android:layout_width="361dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" />
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/swipeRefresh" >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mRecyclerView"
+            android:layout_width="361dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>

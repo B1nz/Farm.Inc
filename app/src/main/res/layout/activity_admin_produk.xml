@@ -6,31 +6,31 @@
     android:layout_height="match_parent"
     android:padding="20dp"
     android:orientation="vertical"
-    tools:context=".SearchActivity">
+    tools:context=".AdminProdukActivity">
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <ImageButton
-            android:id="@+id/backSrch"
+            android:id="@+id/backAdm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#00000000"
             android:src="@drawable/back_black" />
 
         <EditText
-            android:id="@+id/searchEt"
+            android:id="@+id/searchEAdm"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:backgroundTint="#000"
-            android:hint="Search Product"
+            android:hint="Search My Product"
             android:textColor="#000"
             android:textColorHint="#000"
             android:textSize="20dp" />
 
         <ImageButton
-            android:id="@+id/searchSrch"
+            android:id="@+id/searchAdm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#00000000"
@@ -45,7 +45,7 @@
         android:weightSum="3" >
 
         <Button
-            android:id="@+id/allSrch"
+            android:id="@+id/allAdm"
             android:text="All Kategori"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
             android:layout_margin="10dp" />
 
         <Button
-            android:id="@+id/buahSrch"
+            android:id="@+id/buahAdm"
             android:text="Buah"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
             android:layout_margin="10dp"/>
 
         <Button
-            android:id="@+id/sayurSrch"
+            android:id="@+id/sayurAdm"
             android:text="Sayur"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/searchSwipe">
+        android:id="@+id/apSwipe" >
 
         <ScrollView
             android:layout_width="match_parent"
