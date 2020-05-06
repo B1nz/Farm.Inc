@@ -8,6 +8,10 @@
     android:padding="16dp"
     tools:context=".ProdukActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/iduser" />
 
     <EditText
         android:id="@+id/idPa"
@@ -15,7 +19,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="id"
-        android:inputType="number" />
+        android:inputType="number"
+        android:visibility="gone"/>
 
     <EditText
         android:id="@+id/imagePa"
@@ -39,6 +44,14 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="harga"
+        android:inputType="textMultiLine" />
+
+    <EditText
+        android:id="@+id/deskripsiPa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="deskripsi"
         android:inputType="textMultiLine" />
 
     <TextView

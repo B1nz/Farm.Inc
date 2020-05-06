@@ -28,6 +28,17 @@ class ProfileActivity : AppCompatActivity() {
             finish()
         }
 
+        produkBtn.setOnClickListener {
+            val sharedPreferences=getSharedPreferences("SEARCH", Context.MODE_PRIVATE)
+            val editor=sharedPreferences.edit()
+
+            editor.putString("CARI","")
+            editor.putString("KATEGORI","")
+            editor.apply()
+
+            startActivity(Intent(this, AdminProdukActivity::class.java))
+        }
+
         logoutBtn.setOnClickListener{
             val sharedPreferences=getSharedPreferences("CEKLOGIN", Context.MODE_PRIVATE)
             val editor=sharedPreferences.edit()

@@ -1,6 +1,6 @@
 package com.gluthfi.farminc
 
-import UserAdapter
+import AdminAdapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -14,47 +14,47 @@ import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONObjectRequestListener
+import kotlinx.android.synthetic.main.activity_admin_produk.*
 import kotlinx.android.synthetic.main.activity_search.*
-import kotlinx.android.synthetic.main.activity_search.searchEt
 import org.json.JSONObject
 import java.util.ArrayList
 
-class SearchActivity : AppCompatActivity() {
+class AdminProdukActivity : AppCompatActivity() {
 
     @SuppressLint("WrongConstant")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search)
+        setContentView(R.layout.activity_admin_produk)
 
-        backSrch.setOnClickListener {
+        backAdm.setOnClickListener {
 
-            val sharedPreferences=getSharedPreferences("SEARCH", Context.MODE_PRIVATE)
-            val editor=sharedPreferences.edit()
+            val sharedPreferencesA=getSharedPreferences("ADMIN", Context.MODE_PRIVATE)
+            val editor=sharedPreferencesA.edit()
 
             editor.putString("CARI","")
             editor.putString("KATEGORI","")
             editor.apply()
 
 
-            startActivity(Intent(this,MainActivity::class.java))
+            startActivity(Intent(this,ProfileActivity::class.java))
             finish()
         }
 
-        searchSrch.setOnClickListener {
+        searchAdm.setOnClickListener {
 
-            val sharedPreferences=getSharedPreferences("SEARCH", Context.MODE_PRIVATE)
-            val editor=sharedPreferences.edit()
+            val sharedPreferencesA=getSharedPreferences("ADMIN", Context.MODE_PRIVATE)
+            val editor=sharedPreferencesA.edit()
 
-            editor.putString("CARI",searchEt.text.toString())
+            editor.putString("CARI",searchEAdm.text.toString())
             editor.apply()
 
             startActivity(Intent(getIntent()))
             finish()
         }
 
-        allSrch.setOnClickListener {
-            val sharedPreferences=getSharedPreferences("SEARCH", Context.MODE_PRIVATE)
-            val editor=sharedPreferences.edit()
+        allAdm.setOnClickListener {
+            val sharedPreferencesA=getSharedPreferences("ADMIN", Context.MODE_PRIVATE)
+            val editor=sharedPreferencesA.edit()
 
             editor.putString("CARI","")
             editor.putString("KATEGORI","")
@@ -64,9 +64,9 @@ class SearchActivity : AppCompatActivity() {
             finish()
         }
 
-        buahSrch.setOnClickListener {
-            val sharedPreferences=getSharedPreferences("SEARCH", Context.MODE_PRIVATE)
-            val editor=sharedPreferences.edit()
+        buahAdm.setOnClickListener {
+            val sharedPreferencesA=getSharedPreferences("ADMIN", Context.MODE_PRIVATE)
+            val editor=sharedPreferencesA.edit()
 
             editor.putString("KATEGORI","buah")
             editor.apply()
@@ -75,18 +75,18 @@ class SearchActivity : AppCompatActivity() {
             finish()
         }
 
-        sayurSrch.setOnClickListener {
-            val sharedPreferences = getSharedPreferences("SEARCH", Context.MODE_PRIVATE)
-            val editor = sharedPreferences.edit()
+        sayurAdm.setOnClickListener {
+            val sharedPreferencesA=getSharedPreferences("ADMIN", Context.MODE_PRIVATE)
+            val editor=sharedPreferencesA.edit()
 
-            editor.putString("KATEGORI", "sayur")
+            editor.putString("KATEGORI","sayur")
             editor.apply()
 
             startActivity(Intent(getIntent()))
             finish()
         }
 
-        searchSwipe.setOnRefreshListener {
+        apSwipe.setOnRefreshListener {
             getData()
         }
 
@@ -96,26 +96,31 @@ class SearchActivity : AppCompatActivity() {
 
     private fun getData() {
 
-        searchSwipe.isRefreshing = true
+        apSwipe.isRefreshing = true
 
         val sRecyclerView = findViewById(R.id.sRecyclerView) as RecyclerView
         sRecyclerView.layoutManager= LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         sRecyclerView.setHasFixedSize(true)
 
-        val sharedPreferences = getSharedPreferences("SEARCH", Context.MODE_PRIVATE)
-        val cari = sharedPreferences.getString("CARI","")
-        var kategori = sharedPreferences.getString("KATEGORI","")
+        val sharedPreferencesA = getSharedPreferences("ADMIN", Context.MODE_PRIVATE)
+        val cari = sharedPreferencesA.getString("CARI","")
+        var kategori = sharedPreferencesA.getString("KATEGORI","")
 
         val searchPrdk = ArrayList<Produk>()
 
-        AndroidNetworking.post(ApiEndPoint.SEARCH)
+        val sharedPreferences = getSharedPreferences("CEKLOGIN", Context.MODE_PRIVATE)
+        val pengguna_id=sharedPreferences.getString("ID","")
+
+        AndroidNetworking.post(ApiEndPoint.ADMIN_PRODUK)
+            .addBodyParameter("pengguna_id", pengguna_id)
             .addBodyParameter("search", cari)
             .addBodyParameter("kategori", kategori)
             .setPriority(Priority.MEDIUM)
             .build()
             .getAsJSONObject(object : JSONObjectRequestListener {
                 override fun onResponse(response: JSONObject) {
-                    searchSwipe.isRefreshing = false
+
+                    apSwipe.isRefreshing = false
 
                     val jsonArray = response.getJSONArray("result")
 
@@ -134,15 +139,15 @@ class SearchActivity : AppCompatActivity() {
 
                     }
 
-                    val adapter = UserAdapter(applicationContext, searchPrdk)
+                    val adapter = AdminAdapter(applicationContext, searchPrdk)
                     sRecyclerView.adapter=adapter
 
                 }
 
                 override fun onError(anError: ANError?) {
-                    searchSwipe.isRefreshing = false
+                    apSwipe.isRefreshing = false
                     Log.d("ONERROR",anError?.errorDetail?.toString())
-                    Toast.makeText(applicationContext,"Connection Failure",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext,"Connection Failure", Toast.LENGTH_SHORT).show()
                 }
 
             })
