@@ -15,6 +15,12 @@
         android:background="#00000000"
         android:src="@drawable/back_black" />
 
+    <ImageView
+        android:id="@+id/imageDt"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:src="@drawable/db" />
+
     <TextView
         android:id="@+id/idDt"
         android:layout_width="match_parent"
@@ -23,13 +29,6 @@
         android:hint="id"
         android:inputType="number"
         android:visibility="gone"/>
-
-    <TextView
-        android:id="@+id/imageDt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="img" />
 
     <TextView
         android:id="@+id/namaDt"
@@ -69,7 +68,7 @@
         android:layout_marginLeft="2dp"
         android:layout_marginRight="2dp"
         android:layout_marginTop="10dp"
-        android:text="Kategori"
+        android:text="alamat"
         android:textSize="16sp" />
 
     <TextView
@@ -79,7 +78,7 @@
         android:layout_marginLeft="2dp"
         android:layout_marginRight="2dp"
         android:layout_marginTop="10dp"
-        android:text="Kategori"
+        android:text="no hp"
         android:textSize="16sp" />
 
 </LinearLayout>

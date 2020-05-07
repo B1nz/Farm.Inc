@@ -1,15 +1,21 @@
 package com.gluthfi.farminc
 
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONObjectRequestListener
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.activity_profile.*
+import kotlinx.android.synthetic.main.produk_list.view.*
 import org.json.JSONObject
 
 class DetailActivity : AppCompatActivity() {
@@ -39,23 +45,26 @@ class DetailActivity : AppCompatActivity() {
     private fun onEditMode(){
 
         idDt.setText(i.getStringExtra("id"))
-        imageDt.setText(i.getStringExtra("image"))
         namaDt.setText(i.getStringExtra("nama"))
         hargaDt.setText(i.getStringExtra("harga"))
         deskripsiDt.setText(i.getStringExtra("deskripsi"))
+        kategoriDt.setText(i.getStringExtra("kategori"))
+
+        Glide.with(this)
+            .load(i.getStringExtra("image"))
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(imageDt)
+
         idDt.isEnabled = false
-
-
-        var kat = i.getStringExtra("kategori")
-        if (kat == "1") {
-            kategoriDt.setText("Sayur")
-        } else {
-            kategoriDt.setText("Buah")
-        }
 
     }
 
     private fun getData() {
+
+        val loading = ProgressDialog(this)
+        loading.setMessage("Memuat data...")
+        loading.show()
+
 
         var id = i.getStringExtra("id")
 
@@ -65,6 +74,8 @@ class DetailActivity : AppCompatActivity() {
             .build()
             .getAsJSONObject(object : JSONObjectRequestListener {
                 override fun onResponse(response: JSONObject) {
+
+                    loading.dismiss()
 
                     val jsonArray = response.getJSONArray("result")
                     for (i in 0 until jsonArray.length()) {
@@ -77,6 +88,7 @@ class DetailActivity : AppCompatActivity() {
                 }
 
                 override fun onError(error: ANError) { // handle error
+                    loading.dismiss()
                 }
 
             })

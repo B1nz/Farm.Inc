@@ -2,6 +2,7 @@ package com.gluthfi.farminc
 
 import UserAdapter
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -34,18 +35,21 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, ProdukActivity::class.java))
         }
 
-        searchBtn.setOnClickListener {
+        searchMain.setOnClickListener {
+
             val sharedPreferences=getSharedPreferences("SEARCH", Context.MODE_PRIVATE)
             val editor=sharedPreferences.edit()
 
-            editor.putString("CARI","")
+            editor.putString("CARI",searchEt.text.toString())
             editor.putString("KATEGORI","")
             editor.apply()
 
             startActivity(Intent(this, SearchActivity::class.java))
+
+            searchEt.setText("")
         }
 
-        searchMain.setOnClickListener {
+        allBtn.setOnClickListener {
 
             val sharedPreferences=getSharedPreferences("SEARCH", Context.MODE_PRIVATE)
             val editor=sharedPreferences.edit()
@@ -71,6 +75,10 @@ class MainActivity : AppCompatActivity() {
 
         swipeRefresh.isRefreshing = true
 
+        val loading = ProgressDialog(this)
+        loading.setMessage("Memuat data...")
+        loading.show()
+
         val recyclerView = findViewById(R.id.mRecyclerView) as RecyclerView
         recyclerView.layoutManager= LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recyclerView.setHasFixedSize(true)
@@ -82,6 +90,8 @@ class MainActivity : AppCompatActivity() {
             .build()
             .getAsJSONObject(object : JSONObjectRequestListener {
                 override fun onResponse(response: JSONObject) {
+
+                    loading.dismiss()
 
                     swipeRefresh.isRefreshing = false
 
@@ -112,6 +122,7 @@ class MainActivity : AppCompatActivity() {
 
                     swipeRefresh.isRefreshing = false
 
+                    loading.dismiss()
                     Log.d("ONERROR",anError?.errorDetail?.toString())
                     Toast.makeText(applicationContext,"Connection Failure",Toast.LENGTH_SHORT).show()
                 }

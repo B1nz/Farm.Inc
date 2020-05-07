@@ -1,9 +1,11 @@
 package com.gluthfi.farminc
 
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
@@ -39,6 +41,11 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     fun postkeserver(data1:String, data2:String, data3:String, data4:String, data5:String, data6: String) {
+
+        val loading = ProgressDialog(this)
+        loading.setMessage("Memuat data...")
+        loading.show()
+
         AndroidNetworking.post(ApiEndPoint.REGISTER)
             .addBodyParameter("nama", data1)
             .addBodyParameter("email", data2)
@@ -50,11 +57,14 @@ class RegisterActivity : AppCompatActivity() {
             .build()
             .getAsJSONArray(object : JSONArrayRequestListener {
                 override fun onResponse(response: JSONArray?) {
+                    loading.dismiss()
                     Log.i("Uji Coba", "Sukses")
                 }
 
                 override fun onError(anError: ANError?) {
-                    Log.i("Uji Coba", "Mandul")
+                    loading.dismiss()
+                    Log.d("ONERROR",anError?.errorDetail?.toString())
+                    Toast.makeText(applicationContext,"Connection Failure",Toast.LENGTH_SHORT).show()
                 }
             })
     }
