@@ -19,8 +19,14 @@
 19
 20    <uses-sdk
 21        android:minSdkVersion="18"
+<<<<<<< HEAD
 21-->C:\Users\ASUS\Desktop\FarmInc\aFileChooser\src\main\AndroidManifest.xml
 22        android:targetSdkVersion="27" />
 22-->C:\Users\ASUS\Desktop\FarmInc\aFileChooser\src\main\AndroidManifest.xml
+=======
+21-->C:\Users\ASUS\AndroidStudioProjects\FarmInc\aFileChooser\src\main\AndroidManifest.xml
+22        android:targetSdkVersion="27" />
+22-->C:\Users\ASUS\AndroidStudioProjects\FarmInc\aFileChooser\src\main\AndroidManifest.xml
+>>>>>>> 44318a2c0be5cd1cbbd95401c8b6e07902ebef68
 23
 24</manifest>
