@@ -3,7 +3,10 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.gluthfi.farminc.DetailActivity
 import com.gluthfi.farminc.Produk
 import com.gluthfi.farminc.R
@@ -11,12 +14,14 @@ import kotlinx.android.synthetic.main.produk_list.view.*
 
 class UserAdapter(private val context: Context, private val produkList: ArrayList<Produk>):RecyclerView.Adapter<UserAdapter.ViewHolder>() {
 
-
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
+        Glide.with(this.context)
+            .load(produkList?.get(position)?.image)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(holder.itemView.imagePrdk)
+
         holder.itemView.idPrdk.text = produkList?.get(position)?.id
-        holder.itemView.imagePrdk.text = produkList?.get(position)?.image
         holder.itemView.namaPrdk.text = produkList?.get(position)?.nama
         holder.itemView.hargaPrdk.text = produkList?.get(position)?.harga
         holder.itemView.penggunaPrdk.text = produkList?.get(position)?.pengguna_id
@@ -26,6 +31,7 @@ class UserAdapter(private val context: Context, private val produkList: ArrayLis
         holder.itemView.cvList.setOnClickListener() {
 
             val i = Intent(context, DetailActivity::class.java)
+
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             i.putExtra("editmode","1")
             i.putExtra("id", produkList?.get(position)?.id)
@@ -55,8 +61,6 @@ class UserAdapter(private val context: Context, private val produkList: ArrayLis
 
 
     class  ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-
-        
     }
 
 }

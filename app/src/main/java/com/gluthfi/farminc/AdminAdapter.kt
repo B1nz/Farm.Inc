@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.gluthfi.farminc.Produk
 import com.gluthfi.farminc.ProdukActivity
 import com.gluthfi.farminc.R
@@ -15,8 +17,12 @@ class AdminAdapter(private val context: Context, private val produkList: ArrayLi
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
+        Glide.with(this.context)
+            .load(produkList?.get(position)?.image)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(holder.itemView.imagePrdk)
+
         holder.itemView.idPrdk.text = produkList?.get(position)?.id
-        holder.itemView.imagePrdk.text = produkList?.get(position)?.image
         holder.itemView.namaPrdk.text = produkList?.get(position)?.nama
         holder.itemView.hargaPrdk.text = produkList?.get(position)?.harga
         holder.itemView.penggunaPrdk.text = produkList?.get(position)?.pengguna_id

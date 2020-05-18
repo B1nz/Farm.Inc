@@ -2,6 +2,7 @@ package com.gluthfi.farminc
 
 import AdminAdapter
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -86,6 +87,39 @@ class AdminProdukActivity : AppCompatActivity() {
             finish()
         }
 
+        umbiAdm.setOnClickListener {
+            val sharedPreferencesA=getSharedPreferences("ADMIN", Context.MODE_PRIVATE)
+            val editor=sharedPreferencesA.edit()
+
+            editor.putString("KATEGORI","umbi")
+            editor.apply()
+
+            startActivity(Intent(getIntent()))
+            finish()
+        }
+
+        bijiAdm.setOnClickListener {
+            val sharedPreferencesA=getSharedPreferences("ADMIN", Context.MODE_PRIVATE)
+            val editor=sharedPreferencesA.edit()
+
+            editor.putString("KATEGORI","biji")
+            editor.apply()
+
+            startActivity(Intent(getIntent()))
+            finish()
+        }
+
+        rempahAdm.setOnClickListener {
+            val sharedPreferencesA=getSharedPreferences("ADMIN", Context.MODE_PRIVATE)
+            val editor=sharedPreferencesA.edit()
+
+            editor.putString("KATEGORI","rempah")
+            editor.apply()
+
+            startActivity(Intent(getIntent()))
+            finish()
+        }
+
         apSwipe.setOnRefreshListener {
             getData()
         }
@@ -95,6 +129,11 @@ class AdminProdukActivity : AppCompatActivity() {
     }
 
     private fun getData() {
+
+        val loading = ProgressDialog(this)
+        loading.setMessage("Memuat data...")
+        loading.show()
+
 
         apSwipe.isRefreshing = true
 
@@ -119,6 +158,8 @@ class AdminProdukActivity : AppCompatActivity() {
             .build()
             .getAsJSONObject(object : JSONObjectRequestListener {
                 override fun onResponse(response: JSONObject) {
+
+                    loading.dismiss()
 
                     apSwipe.isRefreshing = false
 
@@ -146,8 +187,9 @@ class AdminProdukActivity : AppCompatActivity() {
 
                 override fun onError(anError: ANError?) {
                     apSwipe.isRefreshing = false
+                    loading.dismiss()
                     Log.d("ONERROR",anError?.errorDetail?.toString())
-                    Toast.makeText(applicationContext,"Connection Failure", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext,"Connection Failure",Toast.LENGTH_SHORT).show()
                 }
 
             })

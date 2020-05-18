@@ -4,114 +4,175 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/registerbg"
     tools:context=".RegisterActivity">
 
     <EditText
-        android:id="@+id/passwordReg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:layout_marginBottom="384dp"
+        android:id="@+id/alamatReg"
+        android:layout_width="281dp"
+        android:layout_height="141dp"
+        android:background="@drawable/custom_button"
         android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:textColorHint="#000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:fontFamily="@font/moonbold"
+        android:hint="Alamat"
+        android:inputType="text"
+        android:paddingLeft="20dp"
+        android:paddingBottom="70dp"
+        android:textColor="#000"
+        android:textColorHint="#6B825E"
 
-    <EditText
-        android:id="@+id/emailReg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:textColorHint="#000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintHorizontal_bias="0.453"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.351" />
+        app:layout_constraintVertical_bias="0.74" />
 
     <EditText
         android:id="@+id/namaReg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="281dp"
+        android:layout_height="46dp"
+        android:background="@drawable/custom_button"
         android:ems="10"
+        android:textColor="#000"
+        android:textColorHint="#6B825E"
+        android:fontFamily="@font/moonbold"
         android:hint="Nama"
         android:inputType="textPersonName"
-        android:textColorHint="#000"
+        android:paddingLeft="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintHorizontal_bias="0.453"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.268" />
+        app:layout_constraintVertical_bias="0.289" />
 
     <EditText
-        android:id="@+id/alamatReg"
-        android:layout_width="211dp"
-        android:layout_height="141dp"
+        android:id="@+id/emailReg"
+        android:layout_width="281dp"
+        android:layout_height="46dp"
+        android:background="@drawable/custom_button"
         android:ems="10"
-        android:hint="Alamat"
-        android:inputType="text"
-        android:textColorHint="#000"
+        android:fontFamily="@font/moonbold"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="20dp"
+        android:textColor="#000"
+        android:textColorHint="#6B825E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintHorizontal_bias="0.453"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.716" />
+        app:layout_constraintVertical_bias="0.37" />
+
+    <EditText
+        android:id="@+id/passwordReg"
+        android:layout_width="281dp"
+        android:layout_height="46dp"
+        android:layout_marginBottom="368dp"
+        android:background="@drawable/custom_button"
+        android:ems="10"
+        android:fontFamily="@font/moonbold"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:paddingLeft="20dp"
+        android:textColor="#000"
+        android:textColorHint="#6B825E"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.453"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtt2t"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/moonbold"
+        android:text="Create an account to get all features"
+        android:textColor="#666666"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.199" />
+
+    <TextView
+        android:id="@+id/txttt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/moonbold"
+        android:text="Let's Get Started !"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.133" />
 
     <EditText
         android:id="@+id/hpReg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="281dp"
+        android:layout_height="46dp"
+        android:background="@drawable/custom_button"
         android:ems="10"
-        android:hint="No HP"
+        android:fontFamily="@font/moonbold"
+        android:hint="No hp"
+
         android:inputType="number"
-        android:textColorHint="#000"
+        android:paddingLeft="20dp"
+        android:textColor="#000"
+        android:textColorHint="#6B825E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintHorizontal_bias="0.453"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.526" />
+        app:layout_constraintVertical_bias="0.545" />
 
     <Button
         android:id="@+id/btnBackReg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="81dp"
+        android:layout_height="31dp"
+        android:background="@drawable/custom_button2"
+        android:elevation="5dp"
+        android:fontFamily="@font/moonbold"
         android:text="back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.278"
+        app:layout_constraintHorizontal_bias="0.29"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.859" />
+        app:layout_constraintVertical_bias="0.885" />
 
     <Button
         android:id="@+id/btnRegisterReg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="81dp"
+        android:layout_height="31dp"
+        android:background="@drawable/custom_button2"
+        android:elevation="5dp"
+        android:fontFamily="@font/moonbold"
         android:text="Register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.665"
+        app:layout_constraintHorizontal_bias="0.663"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.859" />
+        app:layout_constraintVertical_bias="0.885" />
 
     <TextView
         android:id="@+id/txt1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Status :"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="37dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.065"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.054" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

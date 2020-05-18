@@ -1,17 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
+    android:background="@drawable/tambahprodukk"
     tools:context=".ProdukActivity">
+
+    <TextView
+        android:id="@+id/prdkttl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/moonbold"
+        android:text="Mau Jual Apa hari Ini ?"
+        android:textColor="#000000"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.05" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/iduser" />
+        android:id="@+id/iduser"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.453"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.74" />
 
     <EditText
         android:id="@+id/idPa"
@@ -20,49 +41,162 @@
         android:ems="10"
         android:hint="id"
         android:inputType="number"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.453"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.74"  />
 
-    <EditText
+
+    <ImageView
         android:id="@+id/imagePa"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="img"
-        android:inputType="textPersonName" />
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@mipmap/ic_launcher"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
-    <EditText
-        android:id="@+id/namaPa"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="nama"
-        android:inputType="textMultiLine" />
+    <Button
+        android:id="@+id/btnUpdate"
+        android:layout_width="127dp"
+        android:layout_height="46dp"
+        android:background="@drawable/custom_button2"
+        android:text="UBAH"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.028"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.899" />
 
-    <EditText
-        android:id="@+id/hargaPa"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="harga"
-        android:inputType="textMultiLine" />
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="127dp"
+        android:layout_height="46dp"
+        android:text="HAPUS"
+        android:textColor="#fff"
+        android:background="@drawable/custom_button4"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.94"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.902" />
 
     <EditText
         android:id="@+id/deskripsiPa"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:background="@drawable/custom_button"
         android:ems="10"
-        android:hint="deskripsi"
-        android:inputType="textMultiLine" />
+        android:fontFamily="@font/moonbold"
+        android:hint="Deskripsi"
+        android:inputType="textMultiLine"
+        android:paddingLeft="20dp"
+        android:textColorHint="#323232"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.59"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.44" />
+
+    <EditText
+        android:id="@+id/namaPa"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:background="@drawable/custom_button"
+        android:ems="10"
+        android:fontFamily="@font/moonbold"
+        android:hint="Nama"
+        android:inputType="textMultiLine"
+        android:paddingLeft="20dp"
+        android:textColorHint="#323232"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.573"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.34" />
+
+    <EditText
+        android:id="@+id/imagePaP"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:background="@drawable/custom_button"
+        android:ems="10"
+        android:fontFamily="@font/moonbold"
+        android:hint="Gambar"
+        android:inputType="textPersonName"
+        android:paddingLeft="20dp"
+        android:textColor="#000000"
+        android:textColorHint="#323232"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.54"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.537" />
+
+    <EditText
+        android:id="@+id/hargaPa"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:background="@drawable/custom_button"
+        android:ems="10"
+        android:fontFamily="@font/moonbold"
+        android:hint="Harga"
+        android:inputType="textMultiLine"
+        android:paddingLeft="20dp"
+        android:textColor="#000000"
+        android:textColorHint="#323232"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.524"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.637" />
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="108dp"
+        android:layout_height="36dp"
+        android:ems="10"
+        android:fontFamily="@font/moonbold"
+        android:paddingLeft="20dp"
+        android:paddingTop="8dp"
         android:text="Kategori"
-        android:textSize="16sp" />
+        android:textColor="#323232"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.042"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.716" />
+
+    <Button
+        android:id="@+id/btnCreate"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:background="@drawable/custom_button2"
+        android:fontFamily="@font/moonbold"
+        android:text="Tambah"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.903" />
 
     <RadioGroup
         android:id="@+id/rgKategori"
@@ -71,7 +205,13 @@
         android:layout_marginLeft="2dp"
         android:layout_marginRight="2dp"
         android:layout_marginTop="5dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.786">
 
         <RadioButton
             android:id="@+id/radioSayur"
@@ -87,27 +227,28 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Buah" />
+
+        <RadioButton
+            android:id="@+id/radioBiji"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Biji" />
+
+        <RadioButton
+            android:id="@+id/radioUmbi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Umbi" />
+
+        <RadioButton
+            android:id="@+id/radioRempah"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Rempah" />
     </RadioGroup>
 
-    <Button
-        android:id="@+id/btnCreate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:text="TAMBAH" />
 
-    <Button
-        android:id="@+id/btnUpdate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="UBAH"
-        android:visibility="gone" />
-
-    <Button
-        android:id="@+id/btnDelete"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="HAPUS"
-        android:visibility="gone" />
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

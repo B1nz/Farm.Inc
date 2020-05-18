@@ -1,19 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/detaillproduk"
     android:orientation="vertical"
     android:padding="20dp"
     tools:context=".DetailActivity">
+
+    <ImageView
+        android:id="@+id/imageDt"
+        android:layout_width="432dp"
+        android:layout_height="252dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="114dp"
+        android:layout_marginBottom="40dp"
+        android:src="@drawable/logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.344"
+        app:layout_constraintStart_toEndOf="@+id/backDt"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageButton
         android:id="@+id/backDt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#00000000"
-        android:src="@drawable/back_black" />
+        android:background="@drawable/back_black_bg"
+        android:src="@drawable/back_black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.013"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/idDt"
@@ -22,64 +44,126 @@
         android:ems="10"
         android:hint="id"
         android:inputType="number"
-        android:visibility="gone"/>
-
-    <TextView
-        android:id="@+id/imageDt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="img" />
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/backDt"
+        app:layout_constraintEnd_toStartOf="@+id/backDt"
+        app:layout_constraintStart_toStartOf="@+id/backDt"
+        app:layout_constraintTop_toTopOf="@+id/backDt"
+        />
 
     <TextView
         android:id="@+id/namaDt"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="270dp"
+        android:layout_marginEnd="20dp"
         android:ems="10"
-        android:hint="nama" />
+        android:hint="Nama"
+        android:textColor="#3D5133"
+        android:textColorHint="#3D5133"
+        android:textSize="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="50dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="20dp"
+        android:ems="10"
+        android:hint="Rp. "
+        android:textColor="#000000"
+        android:textColorHint="#000000"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/namaDt" />
 
     <TextView
         android:id="@+id/hargaDt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="230dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="20dp"
         android:ems="10"
-        android:hint="harga" />
+        android:hint="Harga"
+        android:textColor="#000000"
+        android:textColorHint="#000000"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.397"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/namaDt" />
 
     <TextView
         android:id="@+id/deskripsiDt"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="20dp"
         android:ems="10"
-        android:hint="deskripsi" />
+        android:hint="Deskripsi"
+        android:textColor="#000000"
+        android:textColorHint="#000000"
+        android:textSize="17dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hargaDt"
+        />
 
     <TextView
         android:id="@+id/kategoriDt"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="20dp"
         android:text="Kategori"
-        android:textSize="16sp" />
+        android:textColor="#000000"
+        android:textColorHint="#000000"
+        android:textSize="17dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deskripsiDt"
+        />
 
     <TextView
         android:id="@+id/alamatDt"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
-        android:layout_marginTop="10dp"
-        android:text="Kategori"
-        android:textSize="16sp" />
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="20dp"
+        android:text="Alamat"
+        android:textColor="#000000"
+        android:textSize="17dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/noDt"
+        />
 
     <TextView
         android:id="@+id/noDt"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="2dp"
-        android:layout_marginTop="10dp"
-        android:text="Kategori"
-        android:textSize="16sp" />
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="20dp"
+        android:text="Nomor HP"
+        android:textColor="#000000"
+        android:textColorHint="#000000"
+        android:textSize="17dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/kategoriDt"
+        />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,22 +2,26 @@ package com.gluthfi.farminc
 
 import UserAdapter
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONObjectRequestListener
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
-import java.util.ArrayList
+import java.util.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,26 +30,33 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        profile.setOnClickListener {
-            startActivity(Intent(this, ProfileActivity::class.java))
-        }
-
-        tambah.setOnClickListener {
+        val fab = findViewById<FloatingActionButton>(R.id.fab)
+        fab.setOnClickListener {
             startActivity(Intent(this, ProdukActivity::class.java))
         }
 
-        searchBtn.setOnClickListener {
+        val fab2 = findViewById<FloatingActionButton>(R.id.fab2)
+        fab2.setOnClickListener {
+            startActivity(Intent(this, ProfileActivity::class.java))
+        }
+
+
+
+        searchMain.setOnClickListener {
+
             val sharedPreferences=getSharedPreferences("SEARCH", Context.MODE_PRIVATE)
             val editor=sharedPreferences.edit()
 
-            editor.putString("CARI","")
+            editor.putString("CARI",searchEt.text.toString())
             editor.putString("KATEGORI","")
             editor.apply()
 
             startActivity(Intent(this, SearchActivity::class.java))
+
+            searchEt.setText("")
         }
 
-        searchMain.setOnClickListener {
+        allBtn.setOnClickListener {
 
             val sharedPreferences=getSharedPreferences("SEARCH", Context.MODE_PRIVATE)
             val editor=sharedPreferences.edit()
@@ -71,6 +82,10 @@ class MainActivity : AppCompatActivity() {
 
         swipeRefresh.isRefreshing = true
 
+        val loading = ProgressDialog(this)
+        loading.setMessage("Memuat data...")
+        loading.show()
+
         val recyclerView = findViewById(R.id.mRecyclerView) as RecyclerView
         recyclerView.layoutManager= LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recyclerView.setHasFixedSize(true)
@@ -82,6 +97,8 @@ class MainActivity : AppCompatActivity() {
             .build()
             .getAsJSONObject(object : JSONObjectRequestListener {
                 override fun onResponse(response: JSONObject) {
+
+                    loading.dismiss()
 
                     swipeRefresh.isRefreshing = false
 
@@ -112,6 +129,7 @@ class MainActivity : AppCompatActivity() {
 
                     swipeRefresh.isRefreshing = false
 
+                    loading.dismiss()
                     Log.d("ONERROR",anError?.errorDetail?.toString())
                     Toast.makeText(applicationContext,"Connection Failure",Toast.LENGTH_SHORT).show()
                 }

@@ -2,6 +2,7 @@ package com.gluthfi.farminc
 
 import UserAdapter
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -86,6 +87,39 @@ class SearchActivity : AppCompatActivity() {
             finish()
         }
 
+        rempahSrch.setOnClickListener {
+            val sharedPreferences = getSharedPreferences("SEARCH", Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+
+            editor.putString("KATEGORI", "rempah")
+            editor.apply()
+
+            startActivity(Intent(getIntent()))
+            finish()
+        }
+
+        umbiSrch.setOnClickListener {
+            val sharedPreferences = getSharedPreferences("SEARCH", Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+
+            editor.putString("KATEGORI", "umbi")
+            editor.apply()
+
+            startActivity(Intent(getIntent()))
+            finish()
+        }
+
+        bijiSrch.setOnClickListener {
+            val sharedPreferences = getSharedPreferences("SEARCH", Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+
+            editor.putString("KATEGORI", "biji")
+            editor.apply()
+
+            startActivity(Intent(getIntent()))
+            finish()
+        }
+
         searchSwipe.setOnRefreshListener {
             getData()
         }
@@ -97,6 +131,10 @@ class SearchActivity : AppCompatActivity() {
     private fun getData() {
 
         searchSwipe.isRefreshing = true
+
+        val loading = ProgressDialog(this)
+        loading.setMessage("Memuat data...")
+        loading.show()
 
         val sRecyclerView = findViewById(R.id.sRecyclerView) as RecyclerView
         sRecyclerView.layoutManager= LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -115,6 +153,8 @@ class SearchActivity : AppCompatActivity() {
             .build()
             .getAsJSONObject(object : JSONObjectRequestListener {
                 override fun onResponse(response: JSONObject) {
+                    loading.dismiss()
+
                     searchSwipe.isRefreshing = false
 
                     val jsonArray = response.getJSONArray("result")
@@ -141,6 +181,7 @@ class SearchActivity : AppCompatActivity() {
 
                 override fun onError(anError: ANError?) {
                     searchSwipe.isRefreshing = false
+                    loading.dismiss()
                     Log.d("ONERROR",anError?.errorDetail?.toString())
                     Toast.makeText(applicationContext,"Connection Failure",Toast.LENGTH_SHORT).show()
                 }

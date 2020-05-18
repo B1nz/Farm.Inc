@@ -1,2 +1,3 @@
 rootProject.name='FarmInc'
 include ':app'
+include ':aFileChooser'

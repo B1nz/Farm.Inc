@@ -31,7 +31,7 @@ class ProfileUpdate : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences("CEKLOGIN", Context.MODE_PRIVATE)
         val id_pengguna=sharedPreferences.getString("ID","")
 
-        AndroidNetworking.post(ApiEndPoint.PROFILE_UPDATE)
+        AndroidNetworking.post(ApiEndPoint.PROFILE)
             .addBodyParameter("id_pengguna", id_pengguna)
             .setPriority(Priority.MEDIUM)
             .build()
@@ -73,7 +73,7 @@ class ProfileUpdate : AppCompatActivity() {
     }
 
     fun postkeserver(data1:String, data2:String, data3:String, data4:String, data5:String, data6: String, data7:String) {
-        AndroidNetworking.post("http://192.168.100.8/farminc/profileupdate.php")
+        AndroidNetworking.post(ApiEndPoint.PROFILE_UPDATE)
             .addBodyParameter("nama", data1)
             .addBodyParameter("email", data2)
             .addBodyParameter("password", data3)

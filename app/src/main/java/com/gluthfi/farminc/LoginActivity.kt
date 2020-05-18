@@ -1,5 +1,6 @@
 package com.gluthfi.farminc
 
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -51,6 +52,10 @@ class LoginActivity : AppCompatActivity() {
     fun postkerserver(data1:String,data2:String)
     {
 
+        val loading = ProgressDialog(this)
+        loading.setMessage("Memuat data...")
+        loading.show()
+
         AndroidNetworking.post(ApiEndPoint.LOGIN)
             .addBodyParameter("email", data1)
             .addBodyParameter("password", data2)
@@ -58,6 +63,7 @@ class LoginActivity : AppCompatActivity() {
             .build()
             .getAsJSONObject(object : JSONObjectRequestListener {
                 override fun onResponse(response: JSONObject) {
+                    loading.dismiss()
 
                     val jsonArray = response.getJSONArray("result")
                     for (i in 0 until jsonArray.length()) {
@@ -68,6 +74,8 @@ class LoginActivity : AppCompatActivity() {
 
 
                         if (statuslogin=="1"){
+
+                            loading.dismiss()
 
                             val sharedPreferences=getSharedPreferences("CEKLOGIN", Context.MODE_PRIVATE)
                             val editor=sharedPreferences.edit()
@@ -82,7 +90,7 @@ class LoginActivity : AppCompatActivity() {
                             startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                             finish()
                         } else {
-                            Log.i("Uji Coba", "Mandul")
+                            loading.dismiss()
                         }
                     }
 
@@ -91,6 +99,7 @@ class LoginActivity : AppCompatActivity() {
                 }
 
                 override fun onError(error: ANError) { // handle error
+                    loading.dismiss()
                 }
 
             })

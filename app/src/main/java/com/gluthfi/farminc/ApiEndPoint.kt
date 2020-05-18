@@ -3,7 +3,7 @@ package com.gluthfi.farminc
 class ApiEndPoint {
     companion object {
 
-        private val SERVER = "http://192.168.100.8/farminc/"
+        private val SERVER = "https://farminc2.000webhostapp.com/api/"
         val REGISTER = SERVER+"register.php"
         val LOGIN = SERVER+"ceklogin.php"
         val FRESH = SERVER+"freshproduk.php"
